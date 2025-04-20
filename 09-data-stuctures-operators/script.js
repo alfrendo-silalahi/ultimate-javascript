@@ -47,29 +47,84 @@ const restaurant = {
   order: function (starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
+
+  // immediately destructuring object
+  orderDelivery: function ({
+    starterIndex = 1,
+    mainIndex = 1,
+    time = '20:00',
+    address,
+  }) {
+    console.log(
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
+  },
 };
 
-const numbers = [1, 2, 3];
-// const a = numbers[0];
-// console.log(a);
+restaurant.orderDelivery({
+  time: '22:30',
+  address: 'Via del Sole, 21',
+  mainIndex: 2,
+  starterIndex: 2,
+});
 
-const [x, y, z] = numbers; // will not affect the original array
-console.log({ x, y, z });
-console.log(numbers);
+restaurant.orderDelivery({
+  address: 'Sporting Lisbon',
+  starterIndex: 2,
+});
 
-// skip some value from array
-const [main, _, secondary] = restaurant.categories;
-console.log({ main, secondary });
+///// DESTRUCTURING ARRAYS
+// const numbers = [1, 2, 3];
+// // const a = numbers[0];
+// // console.log(a);
 
-// destructuring array from function expression
-const [starter, mainCourse] = restaurant.order(2, 0);
-console.log({ starter, mainCourse });
+// const [x, y, z] = numbers; // will not affect the original array
+// console.log({ x, y, z });
+// console.log(numbers);
 
-// nested destructuring array
-const nestedNumbers = [[1, 2], [3, 4], 5, 6];
-const [[i, k], j] = nestedNumbers;
-console.log({ i, k, j });
+// // skip some value from array
+// const [main, _, secondary] = restaurant.categories;
+// console.log({ main, secondary });
+
+// // destructuring array from function expression
+// const [starter, mainCourse] = restaurant.order(2, 0);
+// console.log({ starter, mainCourse });
+
+// // nested destructuring array
+// const nestedNumbers = [[1, 2], [3, 4], 5, 6];
+// const [[i, k], j] = nestedNumbers;
+// console.log({ i, k, j });
+
+// // default values
+// const [p, q, r, s = 100] = numbers;
+// console.log({ p, q, r, s });
+
+///// DESTRUCTURING OBJECT
+const { name, categories, openingHours } = restaurant;
+console.log({ name, categories, openingHours });
+
+// rename properties after destructuring object
+const {
+  name: restaurantName,
+  openingHours: hours,
+  categories: tags,
+} = restaurant;
+console.log({ restaurantName, hours, tags });
 
 // default values
-const [p, q, r, s = 100] = numbers;
-console.log({ p, q, r, s });
+const { menu = [], starterMenu: starters = [] } = restaurant;
+console.log({ menu, starters });
+
+// mutating variables
+let a = 111;
+let b = 999;
+
+const obj = { a: 23, b: 7, c: 14 };
+({ a, b } = obj);
+console.log({ a, b });
+
+// nested destructuring object
+const {
+  fri: { open, close },
+} = openingHours;
+console.log({ open, close });
