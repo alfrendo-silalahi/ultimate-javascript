@@ -65,6 +65,10 @@ const restaurant = {
       `Here is your delicious pasta with ${ing1}, ${ing2}, and ${ing3}`
     );
   },
+
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient, otherIngredients);
+  },
 };
 
 // restaurant.orderDelivery({
@@ -79,31 +83,61 @@ const restaurant = {
 //   starterIndex: 2,
 // });
 
+///// REST PATTERN AND PARAMETERS
+// SPREAD, because on RIGHT side of =
+const arr = [1, 2, 3, 4, 5, 6];
+
+// REST, because on LEFT side of =
+const [a, b, ...others] = [1, 2, 3, 4, 5, 6];
+console.log(a, b, others);
+
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, risotto, otherFood);
+
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(sat, weekdays);
+
+// functions
+const add = function (...numbers) {
+  const sum = numbers.reduce((prev, currentValue) => prev + currentValue, 0);
+  console.log(sum);
+};
+add(2, 5, 6, 7);
+add(5, 4, 5, 6, 5, 3, 2, 2);
+
+const numbers = [5, 6, 7, 8, 7];
+add(...numbers);
+
+restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
+
 ///// SPREAD OPERATOR
-const arr = [7, 8, 9];
-const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
-console.log(badNewArr);
+// const arr = [7, 8, 9];
+// const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
+// console.log(badNewArr);
 
-// using spread operator
-const newArr = [1, 2, ...arr];
-console.log(newArr);
+// // using spread operator
+// const newArr = [1, 2, ...arr];
+// console.log(newArr);
 
-console.log(...newArr);
+// console.log(...newArr);
 
-// spread operator will not modifying original array
-const newMenu = [...restaurant.mainMenu, 'Gnocci'];
-console.log(newMenu);
+// // spread operator will not modifying original array
+// const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+// console.log(newMenu);
 
-// copy array with spread operator
-const mainMenyCopy = [...restaurant.mainMenu];
+// // copy array with spread operator
+// const mainMenyCopy = [...restaurant.mainMenu];
 
-// join two arrays or more
-const menu = [...restaurant.mainMenu, ...restaurant.starterMenu];
-console.log(menu);
+// // join two arrays or more
+// const menu = [...restaurant.mainMenu, ...restaurant.starterMenu];
+// console.log(menu);
 
-// iterables: arrays, strings, maps, sets. NOT objects
-const str = 'Alfrendo';
-console.log(...str, 'S.', 'S.');
+// // iterables: arrays, strings, maps, sets. NOT objects
+// const str = 'Alfrendo';
+// console.log(...str, 'S.', 'S.');
 
 // const ingredients = [
 //   prompt("Let' make pasta! Ingredient 1?"),
@@ -115,14 +149,14 @@ console.log(...str, 'S.', 'S.');
 
 // restaurant.orderPasta(...ingredients);
 
-// objects with spread operator
-const newRestaurant = { ...restaurant, founder: 'Alfrendo Silalahi' };
-console.log(newRestaurant);
+// // objects with spread operator
+// const newRestaurant = { ...restaurant, founder: 'Alfrendo Silalahi' };
+// console.log(newRestaurant);
 
-// copy object using spread operator
-const restaurantCopy = { ...restaurant };
-restaurantCopy.name = 'Ristorante Roma';
-console.log(restaurantCopy.name, restaurant.name);
+// // copy object using spread operator
+// const restaurantCopy = { ...restaurant };
+// restaurantCopy.name = 'Ristorante Roma';
+// console.log(restaurantCopy.name, restaurant.name);
 
 ///// DESTRUCTURING OBJECT
 // const { name, categories, openingHours } = restaurant;
